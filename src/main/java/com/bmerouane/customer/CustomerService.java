@@ -1,6 +1,6 @@
 package com.bmerouane.customer;
 
-import com.bmerouane.exception.ResourceNotFound;
+import com.bmerouane.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +20,6 @@ public class CustomerService {
 
     public Customer getCustomer(Integer id) {
         return customerDao.selectCustomerById(id)
-                .orElseThrow(() -> new ResourceNotFound("customer with id [%s] not found".formatted(id)));
+                .orElseThrow(() -> new NotFoundException("customer with id [%s] not found".formatted(id)));
     }
 }
