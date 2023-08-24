@@ -1,9 +1,6 @@
 package com.bmerouane.customer;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +22,20 @@ public class CustomerController {
     public Customer getCustomer(@PathVariable("id") Integer id) {
         return customerService.getCustomer(id);
     }
+
+    @PostMapping()
+    public void registerCustomer(@RequestBody CustomerRegistrationRequest request) {
+        customerService.addCustomer(request);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void deleteCustomer(@PathVariable("id") Integer id) {
+        customerService.deleteCustomerById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void updateCustomer(@PathVariable("id") Integer id, @RequestBody CustomerUpdateRequest request) {
+        customerService.updateCustomer(id, request);
+    }
+
 }
