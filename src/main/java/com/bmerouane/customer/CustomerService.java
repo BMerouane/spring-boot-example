@@ -1,6 +1,9 @@
 package com.bmerouane.customer;
 
-import com.bmerouane.exception.NotFoundException;
+import com.bmerouane.exception.DuplicateResourceException;
+import com.bmerouane.exception.RequestValidationException;
+import com.bmerouane.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +13,7 @@ public class CustomerService {
 
     private final CustomerDao customerDao;
 
-    public CustomerService(CustomerDao customerDao) {
+    public CustomerService(@Qualifier("jpa") CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 
@@ -20,6 +23,59 @@ public class CustomerService {
 
     public Customer getCustomer(Integer id) {
         return customerDao.selectCustomerById(id)
-                .orElseThrow(() -> new NotFoundException("customer with id [%s] not found".formatted(id)));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer with id [%s] not found".formatted(id)));
+    }
+
+    public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
+        if (customerDao.existPersonWithEmail(customerRegistrationRequest.email())) {
+            throw new DuplicateResourceException("Email already taken");
+        }
+
+        Customer customer = new Customer(
+                customerRegistrationRequest.name(),
+                customerRegistrationRequest.email(),
+                customerRegistrationRequest.age()
+        );
+
+        customerDao.insertCustomer(customer);
+    }
+
+    public void deleteCustomerById(Integer id) {
+        if (!customerDao.existPersonWithId(id)) {
+            throw new ResourceNotFoundException("Customer with id [%s] not found".formatted(id));
+        }
+        customerDao.deleteCustomerById(id);
+    }
+
+    public void updateCustomer(Integer id, CustomerUpdateRequest updateRequest) {
+        Customer customer = getCustomer(id);
+
+        boolean changes = false;
+
+        if (updateRequest.name() != null && !updateRequest.name().equals(customer.getName())) {
+            customer.setName(updateRequest.name());
+            customerDao.updateCustomer(customer);
+            changes = true;
+        }
+
+        if (updateRequest.age() != null && !updateRequest.age().equals(customer.getAge())) {
+            customer.setAge(updateRequest.age());
+            customerDao.updateCustomer(customer);
+            changes = true;
+        }
+
+        if (updateRequest.email() != null && !updateRequest.email().equals(customer.getEmail())) {
+            if (customerDao.existPersonWithEmail(updateRequest.email())) {
+                throw new DuplicateResourceException("Email already taken");
+            }
+            customer.setEmail(updateRequest.email());
+            changes = true;
+        }
+
+        if (!changes) {
+            throw new RequestValidationException("No data changes found");
+        }
+
+        customerDao.updateCustomer(customer);
     }
 }
