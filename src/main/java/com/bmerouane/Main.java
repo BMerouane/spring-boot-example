@@ -2,12 +2,11 @@ package com.bmerouane;
 
 import com.bmerouane.customer.Customer;
 import com.bmerouane.customer.CustomerRepository;
+import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.List;
 
 @SpringBootApplication
 public class Main {
@@ -18,19 +17,17 @@ public class Main {
     @Bean
     CommandLineRunner runner(CustomerRepository customerRepository) {
         return args -> {
-            Customer alexandre = new Customer(
-                    "Alexandre",
-                    "alexandre@gmail.com",
-                    26
-            );
-            Customer christopher = new Customer(
-                    "Christopher",
-                    "christopher@gmail.com",
-                    26
+            var faker = new Faker();
+            var name = faker.name();
+            var firstName = name.firstName();
+            var lastName = name.lastName();
+            Customer customer = new Customer(
+                    firstName + " " + lastName,
+                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@example.com",
+                    faker.number().numberBetween(18, 100)
             );
 
-            List<Customer> customers = List.of(alexandre, christopher);
-            customerRepository.saveAll(customers);
+            customerRepository.save(customer);
         };
     }
 }
