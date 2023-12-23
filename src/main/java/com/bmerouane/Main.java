@@ -1,7 +1,7 @@
 package com.bmerouane;
 
-import com.bmerouane.customer.Customer;
-import com.bmerouane.customer.CustomerRepository;
+import com.bmerouane.model.customer.Customer;
+import com.bmerouane.repository.jpa.CustomerRepository;
 import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

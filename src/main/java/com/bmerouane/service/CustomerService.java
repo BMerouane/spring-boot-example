@@ -1,8 +1,12 @@
-package com.bmerouane.customer;
+package com.bmerouane.service;
 
+import com.bmerouane.dto.CustomerRegistrationRequest;
+import com.bmerouane.dto.CustomerUpdateRequest;
 import com.bmerouane.exception.DuplicateResourceException;
 import com.bmerouane.exception.RequestValidationException;
 import com.bmerouane.exception.ResourceNotFoundException;
+import com.bmerouane.model.customer.Customer;
+import com.bmerouane.repository.CustomerDao;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
