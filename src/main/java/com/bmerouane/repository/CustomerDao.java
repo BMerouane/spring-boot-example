@@ -1,4 +1,6 @@
-package com.bmerouane.customer;
+package com.bmerouane.repository;
+
+import com.bmerouane.model.customer.Customer;
 
 import java.util.List;
 import java.util.Optional;

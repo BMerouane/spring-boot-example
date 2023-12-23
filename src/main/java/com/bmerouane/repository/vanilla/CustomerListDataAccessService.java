@@ -1,7 +1,7 @@
-package com.bmerouane.customer.vanilla;
+package com.bmerouane.repository.vanilla;
 
-import com.bmerouane.customer.Customer;
-import com.bmerouane.customer.CustomerDao;
+import com.bmerouane.model.customer.Customer;
+import com.bmerouane.repository.CustomerDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
-package com.bmerouane.customer;
+package com.bmerouane.repository.jpa;
 
+import com.bmerouane.model.customer.Customer;
+import com.bmerouane.repository.CustomerDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

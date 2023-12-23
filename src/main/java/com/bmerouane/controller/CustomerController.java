@@ -1,5 +1,9 @@
-package com.bmerouane.customer;
+package com.bmerouane.controller;
 
+import com.bmerouane.dto.CustomerRegistrationRequest;
+import com.bmerouane.dto.CustomerUpdateRequest;
+import com.bmerouane.model.customer.Customer;
+import com.bmerouane.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

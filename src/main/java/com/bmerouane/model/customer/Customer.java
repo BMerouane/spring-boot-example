@@ -1,4 +1,4 @@
-package com.bmerouane.customer;
+package com.bmerouane.model.customer;
 
 import jakarta.persistence.*;
 
