@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Main {
+
+    private static final String EMAIL_DOMAIN = "@example.com";
+
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
@@ -23,7 +26,7 @@ public class Main {
             var lastName = name.lastName();
             Customer customer = new Customer(
                     firstName + " " + lastName,
-                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@example.com",
+                    firstName.toLowerCase() + "." + lastName.toLowerCase() + EMAIL_DOMAIN,
                     faker.number().numberBetween(18, 100)
             );
 
