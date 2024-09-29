@@ -240,7 +240,6 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .orElseThrow();
 
         var newEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-        ;
 
         // When email is changed
         Customer update = new Customer();
