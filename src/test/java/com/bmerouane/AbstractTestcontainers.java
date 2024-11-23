@@ -21,6 +21,7 @@ public abstract class AbstractTestcontainers {
             .withDatabaseName("bmerouane-dao-unit-test")
             .withUsername("bmerouane")
             .withPassword("password");
+    protected static final Faker FAKER = new Faker();
 
     @BeforeAll
     static void beforeAll() {
@@ -50,7 +51,5 @@ public abstract class AbstractTestcontainers {
     protected static JdbcTemplate getJdbcTemplate() {
         return new JdbcTemplate(getDataSource());
     }
-
-    protected static final Faker FAKER = new Faker();
 
 }
