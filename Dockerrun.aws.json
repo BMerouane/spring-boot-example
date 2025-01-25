@@ -1,0 +1,23 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "bmerouane-api",
+      "image": "bmeebs/bmerouane-api:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:postgresql://awseb-e-3awgm6vy8g-stack-awsebrdsdatabase-ix4gkxojf7co.chs22ii26wck.eu-west-3.rds.amazonaws.com:5432/customer"
+        }
+      ]
+    }
+  ]
+}
