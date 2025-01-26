@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Main {
 
-    private static final String EMAIL_DOMAIN = "@example.com";
+    private static final String EMAIL_DOMAIN = "@google.com";
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
