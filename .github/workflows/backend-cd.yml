@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: unbutu-latest
+    runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres:17.2
